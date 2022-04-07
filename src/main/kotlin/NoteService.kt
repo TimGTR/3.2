@@ -19,11 +19,26 @@ object NoteService {
         return 0
     }
 
-    fun delete(noteId: Int): Int {
+    fun delete(noteId: Int): Boolean {
         for (note in notes) {
             if (noteId == note.key.noteId) {
-                notes.remove(note)
+                notes.remove(note.key)
+                return true
             }
         }
+        return false
+    }
+
+    fun deleteComment(commentID: Int, ownerId: Int) {
+        for (value in notes.values) {
+            for (comment in value) {
+                if (comment != null) {
+                    if (comment.commentId == commentID) {
+                        value.remove(comment)
+                    }
+                }
+            }
+        }
+
     }
 }
