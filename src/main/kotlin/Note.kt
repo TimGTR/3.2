@@ -1,10 +1,10 @@
 data class Note(
-    public var noteId: Int,
-    val title: String,
-    val text: String,
-    val privacy: Int,
-    val privacyView: String,
-    val privacyComment: String
+    var noteId: Int,
+    var title: String,
+    var text: String,
+    var privacy: Int,
+    var privacyView: String,
+    var privacyComment: String
 //    val commentPrivacy: String,
 //    val note_ids: String,
 //    val user_id: Int,

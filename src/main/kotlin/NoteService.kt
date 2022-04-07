@@ -41,4 +41,16 @@ object NoteService {
         }
 
     }
+
+    fun edit(noteId: Int, title: String, text: String, privacyView: String, privacyComment: String) {
+        for (note in notes) {
+            if (noteId == note.key.noteId) {
+                note.key.title = title
+                note.key.text = text
+                note.key.privacyView = privacyView
+                note.key.privacyComment = privacyComment
+
+            }
+        }
+    }
 }
