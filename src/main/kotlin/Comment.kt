@@ -1,8 +1,8 @@
 data class Comment(
-    val commentId: Int,
+    var commentId: Int,
     val noteId: Int,
-    val ownerId: Int,
+    var ownerId: Int,
     val replyTo: Int,
-    val message: String,
+    var message: String,
     val guid: String,
 )

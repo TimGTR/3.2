@@ -53,4 +53,18 @@ object NoteService {
             }
         }
     }
+
+    fun editComment(commentID: Int, ownerId: Int, message: String, ) {
+        for (value in notes.values) {
+            for (comment in value) {
+                if (comment != null) {
+                    if (comment.commentId == commentID) {
+                        comment.message = message
+                    }
+                }
+            }
+        }
+    }
+
+
 }
