@@ -29,7 +29,7 @@ class NoteServiceTest {
         val note = Note (1,"1", "1", 1, "1", "1")
         service.add(note)
         val result = service.delete(1)
-        assertNotEquals(true, result)
+        assertTrue(result)
 
     }
 
@@ -41,7 +41,7 @@ class NoteServiceTest {
         service.add(note)
         service.createComment(comment)
         val result = service.edit(1, "2", "2>1", "1", "1")
-        assertNotEquals(true, result)
+        assertTrue(result)
     }
 
     @Test
@@ -49,8 +49,8 @@ class NoteServiceTest {
         val service = NoteService
         val note = Note (1,"1", "1", 1, "1", "1")
         service.add(note)
-        val result = service.deleteComment(1, 1)
-        assertNotEquals(true, result)
+        val result = service.edit(1,"121", "1454", "232", "464")
+        assertTrue(result)
     }
 
     @Test
@@ -61,7 +61,7 @@ class NoteServiceTest {
         service.add(note)
         service.createComment(comment)
         val result = service.editComment(1,1, "12121")
-        assertNotEquals(true, result)
+        assertTrue(result)
     }
 
     @Test
@@ -113,6 +113,6 @@ class NoteServiceTest {
         service.createComment(comment)
         service.createComment(comment2)
         val result = service.restoreComment(1, 1)
-        assertNotEquals(true, result)
+        assertTrue(result)
     }
 }

@@ -1,5 +1,5 @@
 object NoteService {
-    private var notes = mutableMapOf<Note, MutableList<Comment?>>()
+    public var notes = mutableMapOf<Note, MutableList<Comment?>>()
     private var id = 1
 
     fun add(note: Note): Int {
@@ -56,7 +56,6 @@ object NoteService {
                 note.key.privacyView = privacyView
                 note.key.privacyComment = privacyComment
                 return true
-
             }
         }
         return false
@@ -68,6 +67,7 @@ object NoteService {
                 if (comment != null && comment.commentId == commentID) {
                     if (!comment.isDeleted) {
                         comment.message = message
+                        return true
                     } else {
                         return false
                         throw CommentNoFoundException()
