@@ -65,7 +65,7 @@ object NoteService {
     fun editComment(commentID: Int, ownerId: Int, message: String): Boolean {
         for (value in notes.values) {
             for (comment in value) {
-                if (comment != null &&  comment.commentId == commentID) {
+                if (comment != null && comment.commentId == commentID) {
                     if (!comment.isDeleted) {
                         comment.message = message
                     } else {
@@ -78,9 +78,23 @@ object NoteService {
         return false
     }
 
-    fun get(noteIds: ArrayList<Int>, userId: Int, offset: Int, count: Int, sort: Int): MutableList<Comment> {
-
+    fun get(noteIds: ArrayList<Int>, userId: Int, offset: Int, count: Int, sort: Int): MutableList<Comment>? {
+        var listOfUserComments: MutableList<Comment> = mutableListOf()
+        for (value in notes.values) {
+            for (comment in value) {
+                if (comment != null && comment.ownerId == userId) {
+                    if (!comment.isDeleted) {
+                        listOfUserComments += comment
+                    } else {
+                        return null
+                        throw CommentNoFoundException()
+                    }
+                }
+            }
+        }
+        return listOfUserComments
     }
+
 
     fun getById(noteId: Int, ownerId: Int, needWiki: Boolean = false): Note? {
         for (note in notes) {
