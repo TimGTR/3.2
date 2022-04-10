@@ -40,7 +40,6 @@ object NoteService {
                         } else {
                             throw CommentNoFoundException()
                         }
-
                     }
                 }
             }
@@ -121,7 +120,6 @@ object NoteService {
                     if (!comment.isDeleted) {
                         return true
                     } else {
-                        return false
                         throw CommentNoFoundException()
                     }
 

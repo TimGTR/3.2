@@ -50,7 +50,16 @@ class NoteServiceTest {
         val note = Note (1,"1", "1", 1, "1", "1")
         service.add(note)
         val result = service.edit(1,"121", "1454", "232", "464")
-        assertTrue(result)
+        assertEquals(true, result)
+    }
+
+    @Test
+    fun editFalse() {
+        val service = NoteService
+        val note = Note (1,"1", "1", 1, "1", "1")
+        service.add(note)
+        val result = service.edit(2,"121", "1454", "232", "464")
+        assertFalse(result)
     }
 
     @Test
