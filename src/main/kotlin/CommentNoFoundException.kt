@@ -1,3 +1,3 @@
-class CommentNoFoundException() : RuntimeException() {
+class CommentNoFoundException() : Exception() {
 
 }

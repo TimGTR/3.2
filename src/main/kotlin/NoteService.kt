@@ -1,12 +1,12 @@
-object NoteService {
-    public var notes = mutableMapOf<Note, MutableList<Comment?>>()
+class NoteService {
+    var notes = mutableMapOf<Note, MutableList<Comment?>>()
     private var id = 1
 
     fun add(note: Note): Int {
         note.noteId = id
         id++
         notes[note] = mutableListOf()
-        return id
+        return note.noteId
     }
 
     fun createComment(comment: Comment): Int {
@@ -77,18 +77,11 @@ object NoteService {
         return false
     }
 
-    fun get(noteIds: ArrayList<Int>, userId: Int, offset: Int, count: Int, sort: Int): MutableList<Comment>? {
-        var listOfUserComments: MutableList<Comment> = mutableListOf()
-        for (value in notes.values) {
-            for (comment in value) {
-                if (comment != null && comment.ownerId == userId) {
-                    if (!comment.isDeleted) {
-                        listOfUserComments += comment
-                    } else {
-                        return null
-                        throw CommentNoFoundException()
-                    }
-                }
+    fun get(noteIds: ArrayList<Int>, userId: Int, offset: Int, count: Int, sort: Int): MutableList<Note>? {
+        val listOfUserComments: MutableList<Note> = mutableListOf()
+        for (note in notes.keys) {
+            if (note != null && note.ownerId == userId) {
+                listOfUserComments.add(note)
             }
         }
         return listOfUserComments
@@ -113,19 +106,20 @@ object NoteService {
         return null
     }
 
-    fun restoreComment(commentID: Int, ownerId: Int): Boolean {
-        for (value in notes.values) {
-            for (comment in value) {
-                if (comment != null && comment.commentId == commentID) {
-                    if (!comment.isDeleted) {
+    fun restoreComment(commentID: Int, noteId: Int): Boolean {
+        for (note in notes) {
+            if (noteId == note.key.noteId) {
+                for (comment in note.value) {
+                    if (comment != null && comment.commentId == commentID) {
+                        if (comment.isDeleted == true) {
+                        }
+                        comment.isDeleted = false
                         return true
-                    } else {
+                    }else {
                         throw CommentNoFoundException()
                     }
-
                 }
             }
-
         }
         return false
     }
