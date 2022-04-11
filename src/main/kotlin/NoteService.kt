@@ -44,7 +44,7 @@ class NoteService {
                 }
             }
         }
-        return false
+        return throw CommentNoFoundException()
     }
 
     fun edit(noteId: Int, title: String, text: String, privacyView: String, privacyComment: String): Boolean {

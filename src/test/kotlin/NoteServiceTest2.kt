@@ -72,16 +72,7 @@ class NoteServiceTest2 {
         assertTrue(result)
     }
 
-    @Test
-    fun cantDeleteComment() {
-        val service = NoteService()
-        val note = Note(1, 1, "1", "1", 1, "1", "1")
-        val comment = Comment(5, 1, 1, 1, "1+1", "1")
-        service.add(note)
-        service.createComment(comment)
-        val result = service.deleteComment(1, 1)
-        assertFalse(result)
-    }
+
 
     @Test
     fun edit() {
