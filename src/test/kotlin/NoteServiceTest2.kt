@@ -72,6 +72,16 @@ class NoteServiceTest2 {
         assertTrue(result)
     }
 
+    @Test(expected = CommentNoFoundException::class)
+    fun cantDeleteComment() {
+        val service = NoteService()
+        val note = Note(1, 1, "1", "1", 1, "1", "1")
+        val comment = Comment(1, 1, 1, 1, "1+1", "1")
+        service.add(note)
+        service.createComment(comment)
+        val result = service.deleteComment(3, 1)
+
+    }
 
 
     @Test
@@ -148,6 +158,18 @@ class NoteServiceTest2 {
         assertEquals(note2, result)
     }
 
+
+    @Test
+    fun getNoById() {
+        val service = NoteService()
+        val note = Note(1, 1, "1", "1", 1, "1", "1")
+        val note2 = Note(1, 2, "1", "1", 1, "1", "1")
+        service.add(note)
+        service.add(note2)
+        val result = service.getById(5, 1)
+        assertNotEquals(note2, result)
+    }
+
     @Test
     fun getComments() {
         val service = NoteService()
@@ -194,7 +216,7 @@ class NoteServiceTest2 {
     }
 
     @Test(expected = CommentNoFoundException::class)
-    fun cantRestoreComment() {
+    fun noRestoreComment() {
         val service = NoteService()
         val note = Note(1, 1, "1", "1", 1, "1", "1")
         val note2 = Note(1, 2, "1", "1", 1, "1", "1")
@@ -204,7 +226,6 @@ class NoteServiceTest2 {
         val comment2 = Comment(2, 1, 1, 1, "1+1", "1")
         service.createComment(comment)
         service.createComment(comment2)
-        service.restoreComment(1, 1)
-
+        service.restoreComment(5, 1)
     }
 }

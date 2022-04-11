@@ -115,7 +115,7 @@ class NoteService {
                         }
                         comment.isDeleted = false
                         return true
-                    }else {
+                    } else {
                         throw CommentNoFoundException()
                     }
                 }
